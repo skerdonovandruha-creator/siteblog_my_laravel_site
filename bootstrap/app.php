@@ -14,6 +14,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->alias([
             'admin' => \App\Http\Middleware\EnsureUserIsAdmin::class,
+            'canwrite' => \App\Http\Middleware\EnsureUserCanWrite::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
@@ -21,3 +22,8 @@ return Application::configure(basePath: dirname(__DIR__))
             fn (Request $request) => $request->is('api/*') || $request->expectsJson(),
         );
     })->create();
+
+    $middleware->alias([
+    'admin' => \App\Http\Middleware\EnsureUserIsAdmin::class,
+    'canwrite' => \App\Http\Middleware\EnsureUserCanWrite::class,
+]);

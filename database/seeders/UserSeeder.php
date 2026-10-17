@@ -19,11 +19,23 @@ class UserSeeder extends Seeder
         );
 
         User::updateOrCreate(
-            ['email' => 'user@newshub.local'],
+            ['email' => 'journalist@newshub.local'],
             [
-                'name' => 'user',
+                'name' => 'journalist',
                 'password' => '123',
+                'role' => 'journalist',
                 'is_admin' => false,
+            ]
+        );
+
+
+        User::updateOrCreate(
+            ['email' => 'admin@newshub.local'],
+            [
+                'name' => 'admin',
+                'password' => 'admin',
+                'role' => 'admin',
+                'is_admin' => true,
             ]
         );
     }

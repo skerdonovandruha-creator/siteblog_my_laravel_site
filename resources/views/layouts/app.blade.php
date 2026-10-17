@@ -60,19 +60,20 @@
             @endforeach
         </nav>
         <div class="userbox">
-            @auth
-                @if (auth()->user()->is_admin)
-                    <a href="{{ route('admin.articles.index') }}">⚙ Админ-панель</a>
-                @endif
-                <span>👤 {{ auth()->user()->name }}</span>
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <button type="submit">Выйти</button>
-                </form>
-            @else
-                <a href="{{ route('login') }}">Войти</a>
-            @endauth
-        </div>
+    @auth
+        @if (auth()->user()->isJournalist())
+            <a href="{{ route('admin.articles.index') }}">✍ Панель автора</a>
+        @endif
+        <span>👤 {{ auth()->user()->name }}</span>
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <button type="submit">Выйти</button>
+        </form>
+    @else
+        <a href="{{ route('login') }}">Войти</a>
+        <a href="{{ route('register') }}">Регистрация</a>
+    @endauth
+</div>
     </div>
 </header>
 
